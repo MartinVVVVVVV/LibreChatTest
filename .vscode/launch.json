@@ -2,17 +2,30 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "pwa-node",
-      "request": "launch",
-      "name": "Launch LibreChat (debug)",
+      "name": "Attach to Backend",
+      "type": "node",
+      "request": "attach",
+      "port": 9229,
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}/api/server/index.js",
+      "restart": true,
+      "sourceMaps": true
+    },
+    {
+      "name": "Launch Backend with Inspect",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run backend:inspect",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Debug Backend (Direct)",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "node --inspect api/server/index.js",
       "env": {
-        "NODE_ENV": "production",
-        "NODE_TLS_REJECT_UNAUTHORIZED": "0"
+        "NODE_ENV": "production"
       },
-      "console": "integratedTerminal",
-      "envFile": "${workspaceFolder}/.env"
+      "cwd": "${workspaceFolder}"
     }
   ]
 }
